@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     description: "Psicoterapia online e presencial em Fortaleza com Alcyanne Gouveia, psicóloga CRP 11/15040. Atendimento acolhedor, ético e sigiloso.",
     url: "/",
     type: "website",
-    images: [{ url: "/images/psicoterapia-alcyanne-social-1200x630.png", width: 1200, height: 630, alt: "Alcyanne Gouveia — Psicologia Clínica" }],
+    images: [{ url: "/images/psicoterapia-alcyanne-social-1200x630.jpg", width: 1200, height: 630, alt: "Alcyanne Gouveia — Psicologia Clínica" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Psicoterapia em Fortaleza | Alcyanne Gouveia",
     description: "Psicoterapia online e presencial em Fortaleza com Alcyanne Gouveia, psicóloga CRP 11/15040. Atendimento acolhedor, ético e sigiloso.",
-    images: ["/images/psicoterapia-alcyanne-social-1200x630.png"],
+    images: ["/images/psicoterapia-alcyanne-social-1200x630.jpg"],
   },
   other: {
     "codex-preview": "development",
