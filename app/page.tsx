@@ -102,7 +102,7 @@ export default function Home() {
       <section className="about section" id="sobre">
         <div className="aboutPhoto">
           <img
-            src="/images/alcyanne-gouveia-consultorio.webp"
+            src="/images/alcyanne-gouveia-consultorio-hd.webp"
             alt="Psicóloga Alcyanne Gouveia em seu consultório"
             width="683"
             height="1024"
