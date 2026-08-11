@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://psicoterapia.alcyannegouveiapsi.com.br/sitemap.xml

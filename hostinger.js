@@ -17,7 +17,7 @@
   const ctas = [...document.querySelectorAll("[data-whatsapp-cta]")];
   let activeCta = null;
   let ctaLocation = "";
-  let integrationReady = false;
+  let integrationStatus = "checking";
   let sending = false;
 
   window.dataLayer = window.dataLayer || [];
@@ -160,12 +160,18 @@
 
   captureCampaign();
   fetch(`${API_URL}?status=1`, { headers: { "X-Requested-With": "XMLHttpRequest" }, credentials: "same-origin" })
-    .then((response) => response.json()).then((data) => { integrationReady = data.configured === true; }).catch(() => { integrationReady = false; });
+    .then((response) => {
+      if (!response.ok) throw new Error("Status indisponível");
+      return response.json();
+    })
+    .then((data) => { integrationStatus = data.configured === true ? "ready" : "unavailable"; })
+    .catch(() => { integrationStatus = "unavailable"; });
 
   ctas.forEach((cta) => cta.addEventListener("click", (event) => {
     event.preventDefault();
     ctaLocation = cta.dataset.ctaLocation || "";
-    if (integrationReady) openModal(cta); else openWhatsApp("", null);
+    if (integrationStatus === "unavailable") openWhatsApp("", null);
+    else openModal(cta);
   }));
   modal?.querySelectorAll("[data-modal-close]").forEach((button) => button.addEventListener("click", closeModal));
   phoneInput?.addEventListener("input", () => { phoneInput.value = maskPhone(phoneInput.value); });
@@ -174,4 +180,3 @@
   fallbackButton?.addEventListener("click", () => { const name = nameInput.value.trim().replace(/\s+/g, " "); openWhatsApp(name, null); closeModal(); });
   document.addEventListener("keydown", (event) => { if (!modal.hidden && event.key === "Escape") closeModal(); trapFocus(event); });
 })();
-

@@ -166,7 +166,7 @@ export default function Home() {
       <footer>
         <a className="brand footerBrand" href="#inicio"><img src="/images/alcyanne-gouveia-logo.png" alt="Alcyanne Gouveia — Psicologia Clínica" width="546" height="100" loading="lazy" /></a>
         <p>Psicoterapia online e presencial em Fortaleza.<br/><strong>WhatsApp: (85) 99152-5445</strong></p>
-        <div><a href="#sobre">Sobre</a><a href="#psicoterapia">Psicoterapia</a><a href="#duvidas">Dúvidas</a><a href="/politica-de-privacidade">Política de Privacidade</a></div>
+        <div><a href="#sobre">Sobre</a><a href="#psicoterapia">Psicoterapia</a><a href="#duvidas">Dúvidas</a><a href="/politica-de-privacidade">Política de Privacidade</a><button type="button" className="footerLinkButton" data-manage-cookies>Gerenciar cookies</button></div>
         <small>© 2026 Alcyanne Gouveia. Todos os direitos reservados.</small>
       </footer>
 
