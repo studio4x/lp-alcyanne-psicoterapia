@@ -80,6 +80,7 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   assert.equal(new Set(ids).size, ids.length);
   for (const id of ["inicio", "psicoterapia", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
   assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 5);
+  assert.match(home, /<script src="\/hostinger\.js\?v=20260811-cdn-bypass-1" defer><\/script>/);
   assert.match(home, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/"/);
   assert.match(home, /property="og:type" content="website"/);
   assert.match(home, /name="twitter:card" content="summary_large_image"/);
