@@ -5,11 +5,7 @@ export default function Home() {
     <main>
       <header className="topbar">
         <a className="brand" href="#inicio" aria-label="Alcyanne Gouveia — início">
-          <span>AG</span>
-          <div>
-            <strong>Alcyanne Gouveia</strong>
-            <small>Psicóloga · CRP 11/15040</small>
-          </div>
+          <img src="/images/alcyanne-gouveia-logo.png" alt="Alcyanne Gouveia — Psicologia Clínica" width="546" height="100" />
         </a>
         <nav aria-label="Navegação principal">
           <a href="#psicoterapia">Psicoterapia</a>
@@ -168,7 +164,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand footerBrand" href="#inicio"><span>AG</span><div><strong>Alcyanne Gouveia</strong><small>Psicóloga · CRP 11/15040</small></div></a>
+        <a className="brand footerBrand" href="#inicio"><img src="/images/alcyanne-gouveia-logo.png" alt="Alcyanne Gouveia — Psicologia Clínica" width="546" height="100" loading="lazy" /></a>
         <p>Psicoterapia online e presencial em Fortaleza.<br/><strong>WhatsApp: (85) 99152-5445</strong></p>
         <div><a href="#sobre">Sobre</a><a href="#psicoterapia">Psicoterapia</a><a href="#duvidas">Dúvidas</a><a href="/politica-de-privacidade">Política de Privacidade</a></div>
         <small>© 2026 Alcyanne Gouveia. Todos os direitos reservados.</small>
