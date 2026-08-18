@@ -76,7 +76,7 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
     assert.equal((html.match(/googletagmanager\.com\/gtm\.js/g) || []).length, 1);
     assert.ok(html.indexOf("consent', 'default'") < html.indexOf("googletagmanager.com/gtm.js"));
     assert.match(html, /class="privacyFloating"[^>]*data-cookie-floating[^>]*data-manage-cookies/);
-    assert.match(html, /cookie-consent\.js\?v=20260818-floating-privacy-1/);
+    assert.match(html, /cookie-consent\.js\?v=20260818-floating-privacy-final-1/);
   }
   const ids = [...home.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length);
