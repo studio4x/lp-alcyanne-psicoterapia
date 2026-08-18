@@ -22,8 +22,26 @@
 
   window.dataLayer = window.dataLayer || [];
 
-  function pushEvent(event, location) {
-    window.dataLayer.push({ event, cta_location: location, service: "psicoterapia" });
+  function pushEvent(event, location, details = {}) {
+    window.dataLayer.push({ event, cta_location: location, service: "psicoterapia", ...details });
+  }
+
+  function pushEventAndWait(event, location, details = {}) {
+    return new Promise((resolve) => {
+      let completed = false;
+      const complete = () => {
+        if (completed) return;
+        completed = true;
+        window.clearTimeout(fallbackTimer);
+        resolve();
+      };
+      const fallbackTimer = window.setTimeout(complete, 1600);
+      pushEvent(event, location, {
+        ...details,
+        eventCallback: complete,
+        eventTimeout: 1500
+      });
+    });
   }
 
   function captureCampaign() {
@@ -134,7 +152,10 @@
       const response = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest" }, body: JSON.stringify(payload), credentials: "same-origin" });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || result.ok !== true) throw new Error(result.message || "Falha ao salvar");
-      pushEvent("lead_form_submit", ctaLocation);
+      await pushEventAndWait("lead_form_submit", ctaLocation, {
+        event_id: leadId,
+        transaction_id: leadId
+      });
       openWhatsApp(valid.name, popup);
       closeModal();
       form.reset();
