@@ -10,6 +10,7 @@ type ConsentChoice = "granted" | "denied";
 export default function CookieConsent() {
   const [open, setOpen] = useState(false);
   const acceptRef = useRef<HTMLButtonElement>(null);
+  const floatingRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let saved: string | null = null;
@@ -41,22 +42,39 @@ export default function CookieConsent() {
       ad_personalization: state,
     });
     setOpen(false);
+    window.setTimeout(() => floatingRef.current?.focus(), 0);
   }
 
-  if (!open) return null;
-
   return (
-    <aside className="cookieConsent" id="cookie-consent" role="region" aria-labelledby="cookie-consent-title">
-      <div className="cookieConsentCopy">
-        <h2 id="cookie-consent-title">Preferências de cookies</h2>
-        <p>Utilizamos cookies e tecnologias semelhantes para medir o desempenho da página e das campanhas. Você pode aceitar ou recusar os cookies não essenciais.</p>
-        <Link href="/politica-de-privacidade/">Política de Privacidade</Link>
-      </div>
-      <div className="cookieConsentActions">
-        <button ref={acceptRef} type="button" className="cookieAccept" onClick={() => save("granted")}>Aceitar</button>
-        <button type="button" className="cookieReject" onClick={() => save("denied")}>Recusar não essenciais</button>
-      </div>
-    </aside>
+    <>
+      {open && (
+        <aside className="cookieConsent" id="cookie-consent" role="region" aria-labelledby="cookie-consent-title">
+          <div className="cookieConsentCopy">
+            <h2 id="cookie-consent-title">Preferências de cookies</h2>
+            <p>Utilizamos cookies e tecnologias semelhantes para medir o desempenho da página e das campanhas. Você pode aceitar ou recusar os cookies não essenciais.</p>
+            <Link href="/politica-de-privacidade/">Política de Privacidade</Link>
+          </div>
+          <div className="cookieConsentActions">
+            <button ref={acceptRef} type="button" className="cookieAccept" onClick={() => save("granted")}>Aceitar</button>
+            <button type="button" className="cookieReject" onClick={() => save("denied")}>Recusar não essenciais</button>
+          </div>
+        </aside>
+      )}
+      {!open && (
+        <button
+          ref={floatingRef}
+          type="button"
+          className="privacyFloating"
+          onClick={() => setOpen(true)}
+          aria-controls="cookie-consent"
+          aria-expanded="false"
+          aria-label="Gerenciar cookies e privacidade"
+        >
+          <span className="privacyFloatingIcon" aria-hidden="true" />
+          <span>Cookies e privacidade</span>
+        </button>
+      )}
+    </>
   );
 }
 
