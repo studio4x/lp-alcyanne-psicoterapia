@@ -3,7 +3,7 @@
 const whatsappUrl =
   "https://api.whatsapp.com/send?phone=5585991525445&text=Ol%C3%A1%2C%20Alcyanne!%20Gostaria%20de%20saber%20mais%20sobre%20a%20psicoterapia%20e%20conhecer%20os%20hor%C3%A1rios%20dispon%C3%ADveis.";
 
-type CtaLocation = "header" | "hero" | "como-funciona" | "cta-final" | "flutuante";
+type CtaLocation = "header" | "hero" | "como-funciona" | "psicologa-fortaleza" | "cta-final" | "flutuante";
 
 type WhatsAppLinkProps = {
   label: string;

@@ -80,13 +80,14 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   const ids = [...home.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length);
   for (const id of ["inicio", "psicoterapia", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
-  assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 5);
+  assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 6);
   assert.match(home, /cookie-consent\.js\?v=20260818-floating-privacy-final-2/);
   assert.match(privacy, /cookie-consent\.js\?v=20260818-floating-privacy-final-1/);
   assert.match(home, /<script src="\/hostinger\.js\?v=20260818-conversion-reliability-1" defer><\/script>/);
   assert.match(home, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/"/);
   assert.match(home, /property="og:type" content="website"/);
   assert.match(home, /name="twitter:card" content="summary_large_image"/);
+  assert.match(home, /name="robots" content="noindex,nofollow,noimageindex"/);
   assert.match(privacy, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/politica-de-privacidade\/"/);
 });
 

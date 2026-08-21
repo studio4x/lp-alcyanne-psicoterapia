@@ -1,4 +1,11 @@
-User-agent: *
+User-agent: AdsBot-Google
 Allow: /
 
-Sitemap: https://psicoterapia.alcyannegouveiapsi.com.br/sitemap.xml
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: *
+Allow: /

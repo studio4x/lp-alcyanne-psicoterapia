@@ -15,24 +15,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://psicoterapia.alcyannegouveiapsi.com.br"),
-  title: "Psicoterapia em Fortaleza | Alcyanne Gouveia",
-  description: "Psicoterapia online e presencial em Fortaleza com Alcyanne Gouveia, psicóloga CRP 11/15040. Atendimento acolhedor, ético e sigiloso.",
+  title: "Psicóloga em Fortaleza | Psicoterapia Individual",
+  description: "Psicoterapia individual com Alcyanne Gouveia, psicóloga em Fortaleza. Atendimento presencial em consultório na Aldeota e Edson Queiroz ou psicoterapia online.",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: { index: false, follow: false, noimageindex: true },
+  },
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Psicoterapia em Fortaleza | Alcyanne Gouveia",
-    description: "Psicoterapia online e presencial em Fortaleza com Alcyanne Gouveia, psicóloga CRP 11/15040. Atendimento acolhedor, ético e sigiloso.",
+    title: "Psicóloga em Fortaleza | Psicoterapia Individual",
+    description: "Psicoterapia individual presencial em Fortaleza ou online com Alcyanne Gouveia, psicóloga CRP 11/15040.",
     url: "/",
     type: "website",
+    locale: "pt_BR",
+    siteName: "Alcyanne Gouveia — Psicologia Clínica",
     images: [{ url: "/images/psicoterapia-alcyanne-social-1200x630.jpg", width: 1200, height: 630, alt: "Alcyanne Gouveia — Psicologia Clínica" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Psicoterapia em Fortaleza | Alcyanne Gouveia",
-    description: "Psicoterapia online e presencial em Fortaleza com Alcyanne Gouveia, psicóloga CRP 11/15040. Atendimento acolhedor, ético e sigiloso.",
+    title: "Psicóloga em Fortaleza | Psicoterapia Individual",
+    description: "Psicoterapia individual presencial em Fortaleza ou online com Alcyanne Gouveia, psicóloga CRP 11/15040.",
     images: ["/images/psicoterapia-alcyanne-social-1200x630.jpg"],
-  },
-  other: {
-    "codex-preview": "development",
   },
   icons: {
     icon: [{ url: "/favicon.png", type: "image/png", sizes: "300x300" }],
