@@ -7,9 +7,9 @@ export default function Home() {
     name: "Alcyanne Gouveia — Psicologia Clínica",
     url: "https://psicoterapia.alcyannegouveiapsi.com.br/",
     telephone: "+55 85 99152-5445",
-    description: "Psicoterapia individual online e presencial em Fortaleza com a psicóloga Alcyanne Gouveia, CRP 11/15040.",
+    description: "Atendimento psicológico online e presencial em Fortaleza com a psicóloga Alcyanne Gouveia, CRP 11/15040.",
     areaServed: [{ "@type": "City", name: "Fortaleza" }, { "@type": "Country", name: "Brasil" }],
-    serviceType: ["Psicoterapia individual", "Psicoterapia presencial", "Psicoterapia online"],
+    serviceType: ["Atendimento psicológico individual", "Psicóloga presencial em Fortaleza", "Psicóloga online"],
     founder: { "@type": "Person", name: "Alcyanne Gouveia", jobTitle: "Psicóloga clínica" },
   };
 
@@ -21,7 +21,7 @@ export default function Home() {
           <img src="/images/alcyanne-gouveia-logo.png" alt="Alcyanne Gouveia — Psicologia Clínica" width="546" height="100" />
         </a>
         <nav aria-label="Navegação principal">
-          <a href="#psicoterapia">Psicoterapia</a>
+          <a href="#psicologa">Psicóloga</a>
           <a href="#sobre">Sobre</a>
           <a href="#duvidas">Dúvidas</a>
         </nav>
@@ -30,9 +30,9 @@ export default function Home() {
 
       <section className="hero" id="inicio">
         <div className="heroCopy">
-          <p className="eyebrow"><i /> Psicoterapia online e presencial em Fortaleza</p>
+          <p className="eyebrow"><i /> Psicóloga online e presencial em Fortaleza</p>
           <h1>
-            Psicoterapia em Fortaleza para <em>cuidar de você</em> e viver com mais leveza.
+            Psicóloga em Fortaleza para <em>cuidar de você</em> e viver com mais leveza.
           </h1>
           <p className="lead">
             Com uma psicóloga em Fortaleza, você encontra um espaço de escuta para
@@ -67,17 +67,17 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="marquee" aria-label="Áreas em que a psicoterapia pode ajudar">
+      <section className="marquee" aria-label="Áreas em que uma psicóloga pode ajudar">
         <div>ANSIEDADE <b>✦</b> DEPRESSÃO <b>✦</b> RELACIONAMENTOS <b>✦</b> AUTOCONHECIMENTO <b>✦</b> MUDANÇAS DE VIDA</div>
       </section>
 
-      <section className="support section" id="psicoterapia">
+      <section className="support section" id="psicologa">
         <div className="sectionIntro">
           <p className="eyebrow"><i /> Quando buscar ajuda</p>
           <h2>Você não precisa lidar com tudo <em>sozinho.</em></h2>
         </div>
         <p className="introText">
-          Pedir ajuda é um gesto de cuidado. A psicoterapia individual oferece um
+          Pedir ajuda é um gesto de cuidado. O atendimento psicológico individual oferece um
           espaço seguro para falar, elaborar experiências e encontrar caminhos
           possíveis, com acompanhamento profissional e respeitando o seu tempo.
         </p>
@@ -116,7 +116,7 @@ export default function Home() {
       <section className="localCare section" aria-labelledby="psicologa-fortaleza">
         <div className="localCareIntro"><p className="eyebrow"><i /> Cuidado próximo e acessível</p><h2 id="psicologa-fortaleza">Psicóloga em Fortaleza para atendimento <em>individual.</em></h2></div>
         <div className="localCareContent">
-          <p>Se você procura psicoterapia em Fortaleza, pode escolher entre o atendimento presencial em consultório de psicologia, nas regiões da Aldeota e de Edson Queiroz, ou a psicoterapia online, disponível para quem está em outras cidades do Brasil e no exterior.</p>
+          <p>Se você procura uma psicóloga em Fortaleza, pode escolher entre o atendimento presencial em consultório de psicologia, nas regiões da Aldeota e de Edson Queiroz, ou o atendimento psicológico online, disponível para quem está em outras cidades do Brasil e no exterior.</p>
           <p>O acompanhamento é conduzido por Alcyanne Gouveia, psicóloga clínica CRP 11/15040. Cada processo é construído de forma individual, com escuta ética, acolhimento e respeito à história de cada pessoa.</p>
           <WhatsAppLink className="primary" location="psicologa-fortaleza" label="Consultar horários de atendimento" />
         </div>
@@ -158,8 +158,8 @@ export default function Home() {
           <h2>Atendimento onde você se sentir <em>mais à vontade.</em></h2>
         </div>
         <div className="modeGrid">
-          <article><span>⌂</span><h3>Psicoterapia presencial em Fortaleza</h3><p>Sessões individuais em consultório de psicologia, com ambiente reservado e acolhedor.</p><small>Aldeota · Edson Queiroz</small></article>
-          <article><span>◉</span><h3>Psicóloga online</h3><p>Psicoterapia online com o mesmo cuidado e sigilo, para realizar as sessões de onde você estiver.</p><small>Para todo o Brasil e exterior</small></article>
+          <article><span>⌂</span><h3>Psicóloga em Fortaleza — atendimento presencial</h3><p>Sessões individuais em consultório de psicologia, com ambiente reservado e acolhedor.</p><small>Aldeota · Edson Queiroz</small></article>
+          <article><span>◉</span><h3>Psicóloga online</h3><p>Atendimento psicológico online com o mesmo cuidado e sigilo, para realizar as sessões de onde você estiver.</p><small>Para todo o Brasil e exterior</small></article>
         </div>
       </section>
 
@@ -170,13 +170,13 @@ export default function Home() {
           <p>Se sua dúvida não estiver aqui, pode me chamar. Ficarei feliz em conversar com você.</p>
         </div>
         <div className="faqList">
-          <details open><summary>Quando devo procurar psicoterapia?<span>＋</span></summary><p>Quando perceber que está difícil lidar sozinho com suas emoções, relações ou decisões. Você não precisa esperar o sofrimento se tornar insuportável para buscar ajuda.</p></details>
+          <details open><summary>Quando devo procurar uma psicóloga?<span>＋</span></summary><p>Quando perceber que está difícil lidar sozinho com suas emoções, relações ou decisões. Você não precisa esperar o sofrimento se tornar insuportável para buscar ajuda.</p></details>
           <details><summary>Como é a primeira sessão?<span>＋</span></summary><p>É um encontro para você contar o que motivou sua busca, conhecer minha forma de trabalho e avaliar se se sente confortável para iniciar o acompanhamento.</p></details>
           <details><summary>A terapia online funciona?<span>＋</span></summary><p>Sim. O atendimento online oferece escuta, privacidade e continuidade do cuidado, desde que você esteja em um ambiente reservado e com conexão estável.</p></details>
           <details><summary>Quanto tempo dura cada sessão?<span>＋</span></summary><p>As sessões duram aproximadamente 50 minutos e, em geral, acontecem uma vez por semana, conforme a necessidade de cada pessoa.</p></details>
-          <details><summary>Preciso ter um diagnóstico para procurar psicoterapia?<span>＋</span></summary><p>Não. A psicoterapia também pode ser procurada por pessoas que desejam compreender melhor suas emoções, relações, escolhas ou momentos de mudança, mesmo sem um diagnóstico.</p></details>
+          <details><summary>Preciso ter um diagnóstico para procurar uma psicóloga?<span>＋</span></summary><p>Não. O acompanhamento com uma psicóloga também pode ser procurado por pessoas que desejam compreender melhor suas emoções, relações, escolhas ou momentos de mudança, mesmo sem um diagnóstico.</p></details>
           <details><summary>Onde acontece o atendimento presencial?<span>＋</span></summary><p>Os atendimentos presenciais acontecem em Fortaleza, com opções na Aldeota e em Edson Queiroz. No primeiro contato, você poderá verificar a localização e os horários disponíveis.</p></details>
-          <details><summary>O atendimento é individual?<span>＋</span></summary><p>Sim. A psicoterapia individual é conduzida de acordo com as necessidades, o momento de vida e os objetivos de cada pessoa.</p></details>
+          <details><summary>O atendimento é individual?<span>＋</span></summary><p>Sim. O atendimento psicológico individual é conduzido de acordo com as necessidades, o momento de vida e os objetivos de cada pessoa.</p></details>
         </div>
       </section>
 
@@ -189,8 +189,8 @@ export default function Home() {
 
       <footer>
         <a className="brand footerBrand" href="#inicio"><img src="/images/alcyanne-gouveia-logo.png" alt="Alcyanne Gouveia — Psicologia Clínica" width="546" height="100" loading="lazy" /></a>
-        <p>Psicoterapia online e presencial em Fortaleza.<br/><strong>WhatsApp: (85) 99152-5445</strong></p>
-        <div><a href="#sobre">Sobre</a><a href="#psicoterapia">Psicoterapia</a><a href="#duvidas">Dúvidas</a><a href="/politica-de-privacidade">Política de Privacidade</a><button type="button" className="footerLinkButton" data-manage-cookies>Gerenciar cookies</button></div>
+        <p>Psicóloga em Fortaleza — atendimento online e presencial.<br/><strong>WhatsApp: (85) 99152-5445</strong></p>
+        <div><a href="#sobre">Sobre</a><a href="#psicologa">Psicóloga</a><a href="#duvidas">Dúvidas</a><a href="/politica-de-privacidade">Política de Privacidade</a><button type="button" className="footerLinkButton" data-manage-cookies>Gerenciar cookies</button></div>
         <small>© 2026 Alcyanne Gouveia. Todos os direitos reservados.</small>
       </footer>
 
