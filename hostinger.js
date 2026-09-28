@@ -23,7 +23,7 @@
   window.dataLayer = window.dataLayer || [];
 
   function pushEvent(event, location, details = {}) {
-    window.dataLayer.push({ event, cta_location: location, service: "psicologia_clinica", ...details });
+    window.dataLayer.push({ event, cta_location: location, service: "psicoterapia", ...details });
   }
 
   function pushEventAndWait(event, location, details = {}) {
@@ -143,7 +143,7 @@
       consentimento: true,
       website: form.elements.website.value,
       cta_location: ctaLocation,
-      service: "psicologia_clinica",
+      service: "psicoterapia",
       page_url: window.location.href,
       referrer: document.referrer,
       ...campaignData()
