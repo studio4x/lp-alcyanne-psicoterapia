@@ -7,10 +7,11 @@ export default function Home() {
     name: "Alcyanne Gouveia — Psicologia Clínica",
     url: "https://psicoterapia.alcyannegouveiapsi.com.br/",
     telephone: "+55 85 99152-5445",
-    description: "Atendimento psicológico online e presencial em Fortaleza com a psicóloga Alcyanne Gouveia, CRP 11/15040.",
+    description: "Psicóloga em Fortaleza, Alcyanne Gouveia (CRP 11/15040), com atendimento psicológico individual presencial na Aldeota e em Edson Queiroz, além de atendimento online.",
     areaServed: [{ "@type": "City", name: "Fortaleza" }, { "@type": "Country", name: "Brasil" }],
-    serviceType: ["Atendimento psicológico individual", "Psicóloga presencial em Fortaleza", "Psicóloga online"],
+    serviceType: ["Atendimento psicológico individual", "Psicóloga em Fortaleza", "Atendimento psicológico presencial", "Atendimento psicológico online"],
     founder: { "@type": "Person", name: "Alcyanne Gouveia", jobTitle: "Psicóloga clínica" },
+    knowsLanguage: ["Português", "Espanhol"],
   };
 
   return (
@@ -30,22 +31,23 @@ export default function Home() {
 
       <section className="hero" id="inicio">
         <div className="heroCopy">
-          <p className="eyebrow"><i /> Psicóloga online e presencial em Fortaleza</p>
+          <p className="eyebrow"><i /> Psicóloga clínica em Fortaleza · CRP 11/15040</p>
           <h1>
             Psicóloga em Fortaleza para <em>cuidar de você</em> e viver com mais leveza.
           </h1>
           <p className="lead">
-            Com uma psicóloga em Fortaleza, você encontra um espaço de escuta para
-            compreender suas emoções, enfrentar momentos difíceis e construir novas
-            formas de se relacionar consigo e com o mundo.
+            Se você procura uma psicóloga em Fortaleza, aqui encontra atendimento psicológico
+            individual, presencial ou online, com escuta profissional para compreender suas
+            emoções, enfrentar momentos difíceis e construir novas formas de se relacionar consigo e com o mundo.
           </p>
           <div className="heroActions">
-            <WhatsAppLink className="primary" location="hero" label="Quero conhecer os horários" />
+            <WhatsAppLink className="primary" location="hero" label="Consultar horários com a psicóloga" />
             <a className="textLink" href="#como-funciona">Como funciona <span>↓</span></a>
           </div>
           <div className="trustRow">
-            <span>✓ Atendimento sigiloso</span>
-            <span>✓ Online ou presencial</span>
+            <span>✓ CRP 11/15040</span>
+            <span>✓ Presencial: Aldeota e Edson Queiroz</span>
+            <span>✓ Atendimento online</span>
             <span>✓ Sessões de 50 minutos</span>
           </div>
         </div>
@@ -74,7 +76,7 @@ export default function Home() {
       <section className="support section" id="psicologa">
         <div className="sectionIntro">
           <p className="eyebrow"><i /> Quando buscar ajuda</p>
-          <h2>Você não precisa lidar com tudo <em>sozinho.</em></h2>
+          <h2>Atendimento psicológico para cuidar do que você está <em>vivendo.</em></h2>
         </div>
         <p className="introText">
           Pedir ajuda é um gesto de cuidado. O atendimento psicológico individual oferece um
@@ -98,13 +100,13 @@ export default function Home() {
       <section className="process section" id="como-funciona">
         <div className="processPanel">
           <p className="eyebrow light"><i /> Como funciona</p>
-          <h2>Um processo construído no <em>seu tempo.</em></h2>
+          <h2>Como funciona o atendimento com a <em>psicóloga.</em></h2>
           <p>
             Cada sessão de psicologia acontece em horário combinado e dura cerca de
             50 minutos. Os encontros costumam ser semanais. Na primeira conversa,
             você poderá contar o que está vivendo, conhecer meu trabalho e tirar suas dúvidas.
           </p>
-          <WhatsAppLink className="creamButton" location="como-funciona" label="Conhecer horários disponíveis" />
+          <WhatsAppLink className="creamButton" location="como-funciona" label="Consultar horários disponíveis" />
         </div>
         <ol className="steps">
           <li><span>01</span><div><h3>Primeiro contato</h3><p>Você envia uma mensagem e verificamos juntos a modalidade e os horários disponíveis.</p></div></li>
@@ -155,7 +157,7 @@ export default function Home() {
       <section className="modalities section" id="modalidades">
         <div className="sectionIntro">
           <p className="eyebrow"><i /> Escolha como cuidar de você</p>
-          <h2>Atendimento onde você se sentir <em>mais à vontade.</em></h2>
+          <h2>Psicóloga presencial em Fortaleza ou atendimento <em>online.</em></h2>
         </div>
         <div className="modeGrid">
           <article><span>⌂</span><h3>Psicóloga em Fortaleza — atendimento presencial</h3><p>Sessões individuais em consultório de psicologia, com ambiente reservado e acolhedor.</p><small>Aldeota · Edson Queiroz</small></article>
@@ -182,8 +184,8 @@ export default function Home() {
 
       <section className="finalCta" id="contato">
         <p className="eyebrow light"><i /> Seu cuidado pode começar hoje</p>
-        <h2>Vamos conversar sobre o que você está vivendo?</h2>
-        <p>Envie uma mensagem para conhecer os horários disponíveis e tirar suas dúvidas.</p>
+        <h2>Fale com uma psicóloga em Fortaleza.</h2>
+        <p>Envie uma mensagem para conhecer os horários de atendimento presencial ou online e tirar suas dúvidas.</p>
         <WhatsAppLink className="creamButton" location="cta-final" label="Conhecer horários disponíveis" />
       </section>
 
