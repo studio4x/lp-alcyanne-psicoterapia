@@ -22,7 +22,7 @@ export default function WhatsAppLink({ label, className, location, ariaLabel, ic
     trackedWindow.dataLayer.push({
       event: "whatsapp_click",
       cta_location: location,
-      service: "psicologia_clinica",
+      service: "psicoterapia",
     });
   }
 
