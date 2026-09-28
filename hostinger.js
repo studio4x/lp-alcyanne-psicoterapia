@@ -23,7 +23,7 @@
   window.dataLayer = window.dataLayer || [];
 
   function pushEvent(event, location, details = {}) {
-    window.dataLayer.push({ event, cta_location: location, service: "psicoterapia", ...details });
+    window.dataLayer.push({ event, cta_location: location, service: "psicologia_clinica", ...details });
   }
 
   function pushEventAndWait(event, location, details = {}) {
@@ -60,8 +60,8 @@
 
   function whatsappUrl(name = "") {
     const message = name
-      ? `Olá, Alcyanne! Meu nome é ${name}. Gostaria de saber mais sobre a psicoterapia e conhecer os horários disponíveis.`
-      : "Olá, Alcyanne! Gostaria de saber mais sobre a psicoterapia e conhecer os horários disponíveis.";
+      ? `Olá, Alcyanne! Meu nome é ${name}. Gostaria de saber mais sobre o atendimento psicológico e conhecer os horários disponíveis.`
+      : "Olá, Alcyanne! Gostaria de saber mais sobre o atendimento psicológico e conhecer os horários disponíveis.";
     return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`;
   }
 
@@ -143,7 +143,7 @@
       consentimento: true,
       website: form.elements.website.value,
       cta_location: ctaLocation,
-      service: "psicoterapia",
+      service: "psicologia_clinica",
       page_url: window.location.href,
       referrer: document.referrer,
       ...campaignData()
