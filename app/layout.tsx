@@ -15,17 +15,17 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://psicoterapia.alcyannegouveiapsi.com.br"),
-  title: "Psicóloga em Fortaleza | Atendimento Online e Presencial",
-  description: "Psicóloga em Fortaleza: Alcyanne Gouveia, CRP 11/15040. Atendimento psicológico individual presencial na Aldeota e Edson Queiroz ou online.",
+  title: "Psicóloga em Fortaleza | Alcyanne Gouveia",
+  description: "Psicóloga em Fortaleza, CRP 11/15040. Atendimento psicológico individual presencial na Aldeota e em Edson Queiroz, além de atendimento online.",
   robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false, noimageindex: true },
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Psicóloga em Fortaleza | Atendimento Online e Presencial",
-    description: "Psicóloga em Fortaleza, Alcyanne Gouveia CRP 11/15040. Atendimento psicológico individual presencial na Aldeota e Edson Queiroz ou online.",
+    title: "Psicóloga em Fortaleza | Alcyanne Gouveia",
+    description: "Psicóloga em Fortaleza, Alcyanne Gouveia CRP 11/15040. Atendimento individual presencial na Aldeota e em Edson Queiroz ou online.",
     url: "/",
     type: "website",
     locale: "pt_BR",
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Psicóloga em Fortaleza | Atendimento Online e Presencial",
-    description: "Psicóloga em Fortaleza, Alcyanne Gouveia CRP 11/15040. Atendimento psicológico individual presencial na Aldeota e Edson Queiroz ou online.",
+    title: "Psicóloga em Fortaleza | Alcyanne Gouveia",
+    description: "Psicóloga em Fortaleza, Alcyanne Gouveia CRP 11/15040. Atendimento individual presencial na Aldeota e em Edson Queiroz ou online.",
     images: ["/images/psicoterapia-alcyanne-social-1200x630.jpg"],
   },
   icons: {
