@@ -1,10 +1,10 @@
 # Alcyanne Gouveia — Psicologia Clínica
 
-> Landing page informativa de psicoterapia individual online e presencial em Fortaleza, Brasil.
+> Landing page informativa da psicóloga Alcyanne Gouveia, com atendimento psicológico individual online e presencial em Fortaleza, Brasil.
 
 ## Página principal
 - URL canônica: https://psicoterapia.alcyannegouveiapsi.com.br/
-- Serviço principal: psicoterapia individual
+- Serviço principal: atendimento psicológico individual
 - Modalidades: atendimento presencial em Fortaleza e atendimento online
 - Profissional: Alcyanne Gouveia, psicóloga clínica, CRP 11/15040
 - Regiões presenciais: Aldeota e Edson Queiroz, Fortaleza
