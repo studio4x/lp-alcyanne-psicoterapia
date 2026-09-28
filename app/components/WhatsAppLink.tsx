@@ -1,7 +1,7 @@
 "use client";
 
 const whatsappUrl =
-  "https://api.whatsapp.com/send?phone=5585991525445&text=Ol%C3%A1%2C%20Alcyanne!%20Gostaria%20de%20saber%20mais%20sobre%20a%20psicoterapia%20e%20conhecer%20os%20hor%C3%A1rios%20dispon%C3%ADveis.";
+  "https://api.whatsapp.com/send?phone=5585991525445&text=Ol%C3%A1%2C%20Alcyanne!%20Gostaria%20de%20saber%20mais%20sobre%20o%20atendimento%20psicol%C3%B3gico%20e%20conhecer%20os%20hor%C3%A1rios%20dispon%C3%ADveis.";
 
 type CtaLocation = "header" | "hero" | "como-funciona" | "psicologa-fortaleza" | "cta-final" | "flutuante";
 
@@ -22,7 +22,7 @@ export default function WhatsAppLink({ label, className, location, ariaLabel, ic
     trackedWindow.dataLayer.push({
       event: "whatsapp_click",
       cta_location: location,
-      service: "psicoterapia",
+      service: "psicologia_clinica",
     });
   }
 
