@@ -89,7 +89,7 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   }
   const ids = [...home.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length);
-  for (const id of ["inicio", "psicoterapia", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
+  for (const id of ["inicio", "psicologa", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
   assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 6);
   assert.match(home, /cookie-consent\.js\?v=20260818-floating-privacy-final-2/);
   assert.match(privacy, /cookie-consent\.js\?v=20260818-floating-privacy-final-1/);
