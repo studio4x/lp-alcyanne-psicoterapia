@@ -56,7 +56,7 @@ $ddd = (int)substr($digits, 0, 2);
 if ($ddd < 11 || $ddd > 99 || (strlen($digits) === 11 && $digits[2] !== '9')) respond(422, ['ok' => false, 'message' => 'Informe um WhatsApp brasileiro válido.']);
 if (($data['consentimento'] ?? false) !== true) respond(422, ['ok' => false, 'message' => 'É necessário aceitar a Política de Privacidade.']);
 
-$allowedCtas = ['header', 'hero', 'como-funciona', 'cta-final', 'flutuante'];
+$allowedCtas = ['header', 'hero', 'como-funciona', 'psicologa-fortaleza', 'cta-final', 'flutuante'];
 if (!in_array((string)($data['cta_location'] ?? ''), $allowedCtas, true)) respond(422, ['ok' => false, 'message' => 'Origem do contato inválida.']);
 $leadId = (string)($data['lead_id'] ?? '');
 if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i', $leadId)) respond(422, ['ok' => false, 'message' => 'Identificador inválido.']);
