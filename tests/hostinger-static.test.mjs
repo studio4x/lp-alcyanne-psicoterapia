@@ -101,6 +101,28 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   assert.match(privacy, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/politica-de-privacidade\/"/);
 });
 
+test("landing copy is conversion-focused and consistent across source and static artifact", async () => {
+  const home = await readFile(new URL("index.html", root), "utf8");
+  const source = await readFile(new URL("app/page.tsx", root), "utf8");
+
+  const headline = "Psicóloga em Fortaleza para <em>atendimento individual</em>, presencial e online.";
+  const firstContact = "Você informa seu contato e, após o envio, continua a conversa pelo WhatsApp para verificar modalidade e horários disponíveis.";
+
+  assert.ok(home.includes(headline));
+  assert.ok(source.includes(headline));
+  assert.ok(home.includes("✓ Atendimento psicológico individual"));
+  assert.ok(source.includes("✓ Atendimento psicológico individual"));
+  assert.ok(home.includes(firstContact));
+  assert.ok(source.includes(firstContact));
+
+  assert.equal((home.match(/>Consultar horários disponíveis <span/g) || []).length, 5);
+  assert.doesNotMatch(home, /Ver horários disponíveis|Consultar horários com a psicóloga|Consultar horários de atendimento|Conhecer horários disponíveis/);
+  assert.doesNotMatch(source, /Ver horários disponíveis|Consultar horários com a psicóloga|Consultar horários de atendimento|Conhecer horários disponíveis/);
+
+  assert.ok(home.includes("Consulte horários com uma psicóloga em Fortaleza."));
+  assert.ok(source.includes("Consulte horários com uma psicóloga em Fortaleza."));
+});
+
 test("conversion dataLayer events remain free of lead name and phone", async () => {
   const source = await readFile(new URL("hostinger.js", root), "utf8");
   const pushEventBody = source.match(/function pushEvent[\s\S]*?\n  }/)?.[0] ?? "";
