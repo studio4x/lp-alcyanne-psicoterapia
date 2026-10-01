@@ -69,6 +69,16 @@ test("an immediate CTA click opens the form while integration status is checking
   assert.equal(window.dataLayer.at(-1).event, "lead_form_open");
 });
 
+test("API aceita todos os pontos de CTA presentes na landing page", async () => {
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const api = await readFile(new URL("api/leads.php", root), "utf8");
+  const locations = [...html.matchAll(/data-cta-location="([^"]+)"/g)].map((match) => match[1]);
+  assert.ok(locations.length > 0);
+  for (const location of new Set(locations)) {
+    assert.equal(api.includes("'" + location + "'"), true, "CTA não permitido na API: " + location);
+  }
+});
+
 test("static pages contain one GTM, consent before GTM, metadata and unique section IDs", async () => {
   const home = await readFile(new URL("index.html", root), "utf8");
   const privacy = await readFile(new URL("politica-de-privacidade/index.html", root), "utf8");
