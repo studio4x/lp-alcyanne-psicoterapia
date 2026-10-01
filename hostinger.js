@@ -66,7 +66,6 @@
   }
 
   function openWhatsApp(name, popup) {
-    pushEvent("whatsapp_click", ctaLocation);
     const url = whatsappUrl(name);
     if (popup && !popup.closed) popup.location.href = url;
     else window.location.href = url;
@@ -167,7 +166,7 @@
     } finally {
       sending = false;
       submitButton.disabled = false;
-      submitButton.textContent = "Continuar para o WhatsApp";
+      submitButton.textContent = "Enviar e continuar para o WhatsApp";
     }
   }
 
