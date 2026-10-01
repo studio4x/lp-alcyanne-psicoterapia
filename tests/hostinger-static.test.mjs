@@ -115,7 +115,7 @@ test("landing copy is conversion-focused and consistent across source and static
   assert.ok(home.includes(firstContact));
   assert.ok(source.includes(firstContact));
 
-  assert.equal((home.match(/Consultar horários disponíveis/g) || []).length, 5);
+  assert.equal((home.match(/>Consultar horários disponíveis <span/g) || []).length, 5);
   assert.doesNotMatch(home, /Ver horários disponíveis|Consultar horários com a psicóloga|Consultar horários de atendimento|Conhecer horários disponíveis/);
   assert.doesNotMatch(source, /Ver horários disponíveis|Consultar horários com a psicóloga|Consultar horários de atendimento|Conhecer horários disponíveis/);
 
