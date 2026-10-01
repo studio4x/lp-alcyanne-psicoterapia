@@ -16,16 +16,6 @@ type WhatsAppLinkProps = {
 export default function WhatsAppLink({ label, className, location, ariaLabel, icon = "↗" }: WhatsAppLinkProps) {
   const accessibleName = ariaLabel || label;
 
-  function trackClick() {
-    const trackedWindow = window as Window & { dataLayer?: Array<Record<string, string>> };
-    trackedWindow.dataLayer = trackedWindow.dataLayer || [];
-    trackedWindow.dataLayer.push({
-      event: "whatsapp_click",
-      cta_location: location,
-      service: "psicoterapia",
-    });
-  }
-
   return (
     <a
       className={className}
@@ -34,7 +24,6 @@ export default function WhatsAppLink({ label, className, location, ariaLabel, ic
       rel="noopener noreferrer"
       data-cta-location={location}
       aria-label={accessibleName}
-      onClick={trackClick}
     >
       {label}{" "}
       {icon === "whatsapp" ? (

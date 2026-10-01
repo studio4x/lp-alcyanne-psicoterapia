@@ -69,6 +69,16 @@ test("an immediate CTA click opens the form while integration status is checking
   assert.equal(window.dataLayer.at(-1).event, "lead_form_open");
 });
 
+test("API aceita todos os pontos de CTA presentes na landing page", async () => {
+  const html = await readFile(new URL("index.html", root), "utf8");
+  const api = await readFile(new URL("api/leads.php", root), "utf8");
+  const locations = [...html.matchAll(/data-cta-location="([^"]+)"/g)].map((match) => match[1]);
+  assert.ok(locations.length > 0);
+  for (const location of new Set(locations)) {
+    assert.equal(api.includes("'" + location + "'"), true, "CTA não permitido na API: " + location);
+  }
+});
+
 test("static pages contain one GTM, consent before GTM, metadata and unique section IDs", async () => {
   const home = await readFile(new URL("index.html", root), "utf8");
   const privacy = await readFile(new URL("politica-de-privacidade/index.html", root), "utf8");
@@ -79,15 +89,15 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   }
   const ids = [...home.matchAll(/<section\b[^>]*\bid="([^"]+)"/g)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length);
-  for (const id of ["inicio", "psicoterapia", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
+  for (const id of ["inicio", "psicologa", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
   assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 6);
   assert.match(home, /cookie-consent\.js\?v=20260818-floating-privacy-final-2/);
   assert.match(privacy, /cookie-consent\.js\?v=20260818-floating-privacy-final-1/);
-  assert.match(home, /<script src="\/hostinger\.js\?v=20260818-conversion-reliability-1" defer><\/script>/);
+  assert.match(home, /<script src="\/hostinger\.js\?v=20261001-form-primary-1" defer><\/script>/);
   assert.match(home, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/"/);
   assert.match(home, /property="og:type" content="website"/);
   assert.match(home, /name="twitter:card" content="summary_large_image"/);
-  assert.match(home, /name="robots" content="noindex,nofollow,noimageindex"/);
+  assert.match(home, /name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/);
   assert.match(privacy, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/politica-de-privacidade\/"/);
 });
 
@@ -188,7 +198,8 @@ test("successful lead waits for the GTM event callback before opening WhatsApp",
   assert.equal(leadEvent.event_id, "lead-test-id");
   assert.equal(leadEvent.transaction_id, "lead-test-id");
   assert.equal(typeof leadEvent.eventCallback, "function");
-  assert.equal(events.at(-1).event, "whatsapp_click");
+  assert.equal(events.at(-1).event, "lead_form_submit");
+  assert.equal(events.some((item) => item.event === "whatsapp_click"), false);
   assert.match(popup.location.href, /phone=5585991525445/);
   assert.equal("nome" in leadEvent, false);
   assert.equal("whatsapp" in leadEvent, false);
