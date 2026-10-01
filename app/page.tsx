@@ -26,25 +26,26 @@ export default function Home() {
           <a href="#sobre">Sobre</a>
           <a href="#duvidas">Dúvidas</a>
         </nav>
-        <WhatsAppLink className="headerCta" location="header" label="Ver horários disponíveis" />
+        <WhatsAppLink className="headerCta" location="header" label="Consultar horários disponíveis" />
       </header>
 
       <section className="hero" id="inicio">
         <div className="heroCopy">
           <p className="eyebrow"><i /> Psicóloga clínica em Fortaleza · CRP 11/15040</p>
           <h1>
-            Psicóloga em Fortaleza para <em>cuidar de você</em> e viver com mais leveza.
+            Psicóloga em Fortaleza para <em>atendimento individual</em>, presencial e online.
           </h1>
           <p className="lead">
-            Se você procura uma psicóloga em Fortaleza, aqui encontra atendimento psicológico
-            individual, presencial ou online, com escuta profissional para compreender suas
-            emoções, enfrentar momentos difíceis e construir novas formas de se relacionar consigo e com o mundo.
+            Atendimento psicológico individual com opção presencial na Aldeota ou em Edson Queiroz,
+            além de atendimento online. Um espaço de escuta profissional para compreender emoções,
+            atravessar momentos difíceis e construir novas formas de se relacionar consigo e com o mundo.
           </p>
           <div className="heroActions">
-            <WhatsAppLink className="primary" location="hero" label="Consultar horários com a psicóloga" />
+            <WhatsAppLink className="primary" location="hero" label="Consultar horários disponíveis" />
             <a className="textLink" href="#como-funciona">Como funciona <span>↓</span></a>
           </div>
           <div className="trustRow">
+            <span>✓ Atendimento psicológico individual</span>
             <span>✓ CRP 11/15040</span>
             <span>✓ Presencial: Aldeota e Edson Queiroz</span>
             <span>✓ Atendimento online</span>
@@ -109,7 +110,7 @@ export default function Home() {
           <WhatsAppLink className="creamButton" location="como-funciona" label="Consultar horários disponíveis" />
         </div>
         <ol className="steps">
-          <li><span>01</span><div><h3>Primeiro contato</h3><p>Você envia uma mensagem e verificamos juntos a modalidade e os horários disponíveis.</p></div></li>
+          <li><span>01</span><div><h3>Primeiro contato</h3><p>Você informa seu contato e, após o envio, continua a conversa pelo WhatsApp para verificar modalidade e horários disponíveis.</p></div></li>
           <li><span>02</span><div><h3>Conversa inicial</h3><p>Um primeiro encontro para compreender sua demanda e alinhar expectativas sobre o cuidado.</p></div></li>
           <li><span>03</span><div><h3>Acompanhamento</h3><p>Sessões regulares, com escuta profissional, acolhimento e respeito ao sigilo profissional.</p></div></li>
         </ol>
@@ -120,7 +121,7 @@ export default function Home() {
         <div className="localCareContent">
           <p>Se você procura uma psicóloga em Fortaleza, pode escolher entre o atendimento presencial em consultório de psicologia, nas regiões da Aldeota e de Edson Queiroz, ou o atendimento psicológico online, disponível para quem está em outras cidades do Brasil e no exterior.</p>
           <p>O acompanhamento é conduzido por Alcyanne Gouveia, psicóloga clínica CRP 11/15040. Cada processo é construído de forma individual, com escuta ética, acolhimento e respeito à história de cada pessoa.</p>
-          <WhatsAppLink className="primary" location="psicologa-fortaleza" label="Consultar horários de atendimento" />
+          <WhatsAppLink className="primary" location="psicologa-fortaleza" label="Consultar horários disponíveis" />
         </div>
       </section>
 
@@ -184,9 +185,9 @@ export default function Home() {
 
       <section className="finalCta" id="contato">
         <p className="eyebrow light"><i /> Seu cuidado pode começar hoje</p>
-        <h2>Fale com uma psicóloga em Fortaleza.</h2>
-        <p>Envie uma mensagem para conhecer os horários de atendimento presencial ou online e tirar suas dúvidas.</p>
-        <WhatsAppLink className="creamButton" location="cta-final" label="Conhecer horários disponíveis" />
+        <h2>Consulte horários com uma psicóloga em Fortaleza.</h2>
+        <p>Informe seu contato para consultar os horários de atendimento presencial ou online e, em seguida, continue a conversa pelo WhatsApp.</p>
+        <WhatsAppLink className="creamButton" location="cta-final" label="Consultar horários disponíveis" />
       </section>
 
       <footer>
@@ -196,7 +197,7 @@ export default function Home() {
         <small>© 2026 Alcyanne Gouveia. Todos os direitos reservados.</small>
       </footer>
 
-      <WhatsAppLink className="floating" location="flutuante" label="" icon="whatsapp" ariaLabel="Falar com Alcyanne pelo WhatsApp" />
+      <WhatsAppLink className="floating" location="flutuante" label="" icon="whatsapp" ariaLabel="Consultar horários disponíveis com Alcyanne" />
     </main>
   );
 }
