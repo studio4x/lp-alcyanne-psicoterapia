@@ -11,10 +11,12 @@ export default function CookieConsent() {
   const [open, setOpen] = useState(false);
   const acceptRef = useRef<HTMLButtonElement>(null);
   const floatingRef = useRef<HTMLButtonElement>(null);
+  const choiceRef = useRef<ConsentChoice | null>(null);
 
   useEffect(() => {
     let saved: string | null = null;
     try { saved = window.localStorage.getItem(STORAGE_KEY); } catch {}
+    choiceRef.current = saved === "granted" || saved === "denied" ? saved : null;
     if (saved !== "granted" && saved !== "denied") window.setTimeout(() => setOpen(true), 0);
 
     const reopen = () => setOpen(true);
@@ -31,6 +33,7 @@ export default function CookieConsent() {
   }, [open]);
 
   function save(choice: ConsentChoice) {
+    const previousChoice = choiceRef.current;
     try { window.localStorage.setItem(STORAGE_KEY, choice); } catch {}
     const state = choice === "granted" ? "granted" : "denied";
     window.dataLayer = window.dataLayer || [];
@@ -41,6 +44,10 @@ export default function CookieConsent() {
       ad_user_data: state,
       ad_personalization: state,
     });
+    choiceRef.current = choice;
+    if (choice === "granted" && previousChoice !== "granted") {
+      window.dataLayer.push({ event: "marketing_consent_granted" });
+    }
     setOpen(false);
     window.setTimeout(() => floatingRef.current?.focus(), 0);
   }
