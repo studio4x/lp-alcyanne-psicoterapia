@@ -96,6 +96,14 @@ $responseCode = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
 $curlError = curl_errno($curl);
 curl_close($curl);
 
+// A refusal due to repeated attempts is not a storage outage.
+// Only preserve a verified, explicitly classified 429 from the trusted webhook.
+if ($curlError === 0 && is_string($responseBody) && $responseCode === 429) {
+    $rateResponse = json_decode($responseBody, true);
+    if (is_array($rateResponse) && ($rateResponse['ok'] ?? null) === false && ($rateResponse['code'] ?? '') === 'rate_limited') {
+        respond(429, ['ok' => false, 'code' => 'rate_limited', 'message' => 'Muitas tentativas. Aguarde alguns minutos e tente novamente.']);
+    }
+}
 if ($curlError !== 0 || !is_string($responseBody) || $responseCode < 200 || $responseCode >= 300) respond(503, ['ok' => false, 'message' => 'Não foi possível registrar seus dados neste momento. Tente novamente.']);
 $response = json_decode($responseBody, true);
 if (!is_array($response) || ($response['ok'] ?? false) !== true) respond(503, ['ok' => false, 'message' => 'Não foi possível registrar seus dados neste momento. Tente novamente.']);
