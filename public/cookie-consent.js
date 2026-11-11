@@ -8,6 +8,7 @@
   const floatingButton = document.querySelector("[data-cookie-floating]");
   const manageButtons = document.querySelectorAll("[data-manage-cookies]");
   let returnFocus = null;
+  let currentChoice = null;
 
   function updateConsent(choice) {
     const state = choice === "granted" ? "granted" : "denied";
@@ -41,8 +42,13 @@
   }
 
   function saveChoice(choice) {
+    const previousChoice = currentChoice;
     try { window.localStorage.setItem(STORAGE_KEY, choice); } catch {}
     updateConsent(choice);
+    currentChoice = choice;
+    if (choice === "granted" && previousChoice !== "granted") {
+      window.dataLayer.push({ event: "marketing_consent_granted" });
+    }
     closeBanner();
     window.setTimeout(() => {
       if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
@@ -52,6 +58,7 @@
 
   let savedChoice = null;
   try { savedChoice = window.localStorage.getItem(STORAGE_KEY); } catch {}
+  currentChoice = savedChoice === "granted" || savedChoice === "denied" ? savedChoice : null;
   if (savedChoice !== "granted" && savedChoice !== "denied") openBanner();
   else closeBanner();
 
