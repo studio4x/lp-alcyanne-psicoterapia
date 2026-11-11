@@ -5,6 +5,7 @@ ini_set('display_errors', '0');
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
+header('X-S4X-Lead-Contract: 20261111-429-v1');
 
 function respond(int $status, array $body): never {
     http_response_code($status);
