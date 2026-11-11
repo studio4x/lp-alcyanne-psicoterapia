@@ -44,6 +44,8 @@ export default function CookieConsent() {
       ad_user_data: state,
       ad_personalization: state,
     });
+    // The GTM consent template processes this before marketing_consent_granted.
+    window.dataLayer.push({ event: "s4x_consent_update", s4x_consent_choice: choice });
     choiceRef.current = choice;
     if (choice === "granted" && previousChoice !== "granted") {
       window.dataLayer.push({ event: "marketing_consent_granted" });
