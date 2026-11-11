@@ -45,6 +45,8 @@
     const previousChoice = currentChoice;
     try { window.localStorage.setItem(STORAGE_KEY, choice); } catch {}
     updateConsent(choice);
+    // GTM template updateConsentState runs before the next queued event.
+    window.dataLayer.push({ event: "s4x_consent_update", s4x_consent_choice: choice });
     currentChoice = choice;
     if (choice === "granted" && previousChoice !== "granted") {
       window.dataLayer.push({ event: "marketing_consent_granted" });
