@@ -55,7 +55,7 @@ try {
     if (php.exitCode !== null) throw new Error(`PHP server exited (${php.exitCode})`);
     try {
       const res = await fetch(origin + "/api/leads.php?status=1");
-      if (res.ok && (await res.json()).configured === true) { ready = true; break; }
+      if (res.ok && res.headers.get("x-s4x-lead-contract") === "20261111-429-v1" && (await res.json()).configured === true) { ready = true; break; }
     } catch {}
     await new Promise(resolve => setTimeout(resolve, 100));
   }
