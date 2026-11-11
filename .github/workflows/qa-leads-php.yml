@@ -1,0 +1,27 @@
+name: QA leads PHP (rate limit contract)
+
+on:
+  pull_request:
+    paths:
+      - 'api/leads.php'
+      - 'tests/leads-api-php.test.mjs'
+      - '.github/workflows/qa-leads-php.yml'
+
+jobs:
+  php-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, curl
+          coverage: none
+      - name: Verify PHP syntax and extensions
+        run: |
+          php -l api/leads.php
+          php -r 'if (!extension_loaded("curl") || !extension_loaded("mbstring")) exit(1);'
+      - name: Run real PHP-to-webhook contract tests (local stub, no live leads)
+        run: node --test tests/leads-api-php.test.mjs
