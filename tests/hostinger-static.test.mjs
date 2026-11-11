@@ -91,8 +91,8 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   assert.equal(new Set(ids).size, ids.length);
   for (const id of ["inicio", "psicologa", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
   assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 6);
-  assert.match(home, /cookie-consent\.js\?v=20260818-floating-privacy-final-2/);
-  assert.match(privacy, /cookie-consent\.js\?v=20260818-floating-privacy-final-1/);
+  assert.match(home, /cookie-consent\.js\?v=20261111-meta-consent-1/);
+  assert.match(privacy, /cookie-consent\.js\?v=20261111-meta-consent-1/);
   assert.match(home, /<script src="\/hostinger\.js\?v=20261001-form-primary-1" defer><\/script>/);
   assert.match(home, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/"/);
   assert.match(home, /property="og:type" content="website"/);
@@ -225,4 +225,68 @@ test("successful lead waits for the GTM event callback before opening WhatsApp",
   assert.match(popup.location.href, /phone=5585991525445/);
   assert.equal("nome" in leadEvent, false);
   assert.equal("whatsapp" in leadEvent, false);
+});
+
+
+test("marketing consent transition notifies GTM only after consent update, without duplicate PageView retriggers", async () => {
+  const source = await readFile(new URL("public/cookie-consent.js", root), "utf8");
+  const handlers = {};
+  const saved = new Map();
+  const dataLayer = [];
+  function button(name) {
+    return {
+      hidden: false,
+      setAttribute() {},
+      focus() {},
+      addEventListener(type, handler) { if (type === "click") handlers[name] = handler; },
+    };
+  }
+  const accept = button("accept");
+  const reject = button("reject");
+  const floating = button("floating");
+  const banner = {
+    hidden: true,
+    querySelector(selector) {
+      return selector === "[data-cookie-accept]" ? accept : selector === "[data-cookie-reject]" ? reject : null;
+    },
+  };
+  const document = {
+    activeElement: null,
+    contains() { return false; },
+    getElementById(id) { return id === "cookie-consent" ? banner : null; },
+    querySelector(selector) { return selector === "[data-cookie-floating]" ? floating : null; },
+    querySelectorAll() { return []; },
+  };
+  const window = {
+    dataLayer,
+    localStorage: {
+      getItem(key) { return saved.get(key) ?? null; },
+      setItem(key, value) { saved.set(key, value); },
+    },
+    setTimeout(callback) { callback(); },
+  };
+  vm.runInNewContext(source, { window, document, HTMLElement: class {} });
+  assert.equal(banner.hidden, false);
+  const marketingEvents = () => dataLayer.filter((item) => item?.event === "marketing_consent_granted");
+  handlers.reject();
+  assert.equal(marketingEvents().length, 0);
+  handlers.accept();
+  assert.equal(marketingEvents().length, 1);
+  assert.equal(dataLayer.at(-2)[0], "consent");
+  assert.equal(dataLayer.at(-2)[1], "update");
+  assert.equal(dataLayer.at(-2)[2].ad_storage, "granted");
+  handlers.accept();
+  assert.equal(marketingEvents().length, 1);
+  handlers.reject();
+  assert.equal(marketingEvents().length, 1);
+  handlers.accept();
+  assert.equal(marketingEvents().length, 2);
+  assert.equal(saved.get("alcyanne_cookie_consent_v1"), "granted");
+});
+
+test("React consent keeps parity with the static marketing-consent event", async () => {
+  const source = await readFile(new URL("app/components/CookieConsent.tsx", root), "utf8");
+  assert.match(source, /choiceRef\.current = choice/);
+  assert.match(source, /choice === "granted" && previousChoice !== "granted"/);
+  assert.match(source, /window\.dataLayer\.push\(\{ event: "marketing_consent_granted" \}\)/);
 });
