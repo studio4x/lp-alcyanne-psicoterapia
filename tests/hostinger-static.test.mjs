@@ -91,8 +91,8 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   assert.equal(new Set(ids).size, ids.length);
   for (const id of ["inicio", "psicologa", "como-funciona", "sobre", "modalidades", "duvidas", "contato"]) assert.ok(ids.includes(id));
   assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 6);
-  assert.match(home, /cookie-consent\.js\?v=20261111-meta-consent-1/);
-  assert.match(privacy, /cookie-consent\.js\?v=20261111-meta-consent-1/);
+  assert.match(home, /cookie-consent\.js\?v=20261111-gtm-consent-api-1/);
+  assert.match(privacy, /cookie-consent\.js\?v=20261111-gtm-consent-api-1/);
   assert.match(home, /<script src="\/hostinger\.js\?v=20261001-form-primary-1" defer><\/script>/);
   assert.match(home, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/"/);
   assert.match(home, /property="og:type" content="website"/);
@@ -272,9 +272,11 @@ test("marketing consent transition notifies GTM only after consent update, witho
   assert.equal(marketingEvents().length, 0);
   handlers.accept();
   assert.equal(marketingEvents().length, 1);
-  assert.equal(dataLayer.at(-2)[0], "consent");
-  assert.equal(dataLayer.at(-2)[1], "update");
-  assert.equal(dataLayer.at(-2)[2].ad_storage, "granted");
+  assert.equal(dataLayer.at(-3)[0], "consent");
+  assert.equal(dataLayer.at(-3)[1], "update");
+  assert.equal(dataLayer.at(-3)[2].ad_storage, "granted");
+  assert.equal(dataLayer.at(-2).event, "s4x_consent_update");
+  assert.equal(dataLayer.at(-2).s4x_consent_choice, "granted");
   handlers.accept();
   assert.equal(marketingEvents().length, 1);
   handlers.reject();
@@ -288,5 +290,17 @@ test("React consent keeps parity with the static marketing-consent event", async
   const source = await readFile(new URL("app/components/CookieConsent.tsx", root), "utf8");
   assert.match(source, /choiceRef\.current = choice/);
   assert.match(source, /choice === "granted" && previousChoice !== "granted"/);
+  assert.match(source, /window\.dataLayer\.push\(\{ event: "s4x_consent_update", s4x_consent_choice: choice \}\)/);
   assert.match(source, /window\.dataLayer\.push\(\{ event: "marketing_consent_granted" \}\)/);
+});
+
+test("consent bridge orders denied/granted transitions and avoids PII", async () => {
+  const source = await readFile(new URL("public/cookie-consent.js", root), "utf8");
+  const start = source.indexOf('function saveChoice(choice)');
+  const end = source.indexOf('let savedChoice = null;', start);
+  const fn = source.slice(start, end);
+  assert.ok(fn.indexOf('updateConsent(choice)') < fn.indexOf('event: "s4x_consent_update"'));
+  assert.ok(fn.indexOf('event: "s4x_consent_update"') < fn.indexOf('event: "marketing_consent_granted"'));
+  assert.doesNotMatch(fn, /nome|telefone|whatsapp|e-?mail|diagnostico/i);
+  assert.match(source, /s4x_consent_choice: choice/);
 });
