@@ -36,11 +36,14 @@ await once(upstream, "listening");
 
 const phpPort = await waitPort();
 const origin = `http://127.0.0.1:${phpPort}`;
+// The production PHP validates the page origin as scheme + host (without port).
+// Separate the browser's local test URL from the synthetic allowed origin.
+const allowedOrigin = "http://127.0.0.1";
 const php = spawn("php", ["-S", `127.0.0.1:${phpPort}`, "-t", root], {
   cwd: root,
   env: {
     ...process.env,
-    ALCYANNE_ALLOWED_ORIGIN: origin,
+    ALCYANNE_ALLOWED_ORIGIN: allowedOrigin,
     ALCYANNE_LEADS_WEBHOOK_URL: `http://127.0.0.1:${upstreamPort}/`,
     ALCYANNE_LEADS_WEBHOOK_SECRET: secret,
   },
@@ -77,7 +80,7 @@ async function submit(cta = "hero") {
     headers: {
       "Content-Type": "application/json",
       "X-Requested-With": "XMLHttpRequest",
-      "Origin": origin,
+      "Origin": allowedOrigin,
       "CF-Connecting-IP": `198.51.100.${current}`,
     },
     body: JSON.stringify({
