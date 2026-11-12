@@ -2,6 +2,7 @@
   "use strict";
 
   const API_URL = "/api/leads.php";
+  const RATE_LIMIT_MESSAGE = "Muitas tentativas. Aguarde alguns minutos e tente novamente.";
   const WHATSAPP_PHONE = "5585991525445";
   const CAMPAIGN_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "gbraid", "wbraid"];
   const modal = document.getElementById("lead-modal");
@@ -150,7 +151,9 @@
     try {
       const response = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest" }, body: JSON.stringify(payload), credentials: "same-origin" });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.ok !== true) throw new Error(result.message || "Falha ao salvar");
+      if (!response.ok || result.ok !== true) {
+        throw new Error(response.status === 429 ? RATE_LIMIT_MESSAGE : "Falha ao salvar");
+      }
       await pushEventAndWait("lead_form_submit", ctaLocation, {
         event_id: leadId,
         transaction_id: leadId
@@ -158,10 +161,11 @@
       openWhatsApp(valid.name, popup);
       closeModal();
       form.reset();
-    } catch {
+    } catch (error) {
       if (popup && !popup.closed) popup.close();
-      statusBox.textContent = "Não foi possível registrar seus dados neste momento. Tente novamente.";
-      retryButton.hidden = false;
+      const rateLimited = error instanceof Error && error.message === RATE_LIMIT_MESSAGE;
+      statusBox.textContent = rateLimited ? RATE_LIMIT_MESSAGE : "Não foi possível registrar seus dados neste momento. Tente novamente.";
+      retryButton.hidden = rateLimited;
       fallbackButton.hidden = false;
     } finally {
       sending = false;

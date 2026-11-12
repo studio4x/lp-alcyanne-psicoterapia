@@ -1,0 +1,28 @@
+name: QA landing measurement and consent
+on:
+  pull_request:
+    paths:
+      - 'hostinger.js'
+      - 'index.html'
+      - 'politica-de-privacidade/index.html'
+      - 'public/cookie-consent.js'
+      - 'tests/hostinger-static.test.mjs'
+      - 'tests/gtm-consent-bridge.test.mjs'
+      - '.github/workflows/qa-landing-measurement.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-analytics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check hostinger.js && node --check public/cookie-consent.js
+      - name: Run static landing consent and lead-flow tests
+        run: node --test tests/hostinger-static.test.mjs tests/gtm-consent-bridge.test.mjs

@@ -93,7 +93,7 @@ test("static pages contain one GTM, consent before GTM, metadata and unique sect
   assert.equal((home.match(/data-whatsapp-cta/g) || []).length, 6);
   assert.match(home, /cookie-consent\.js\?v=20261111-gtm-consent-api-1/);
   assert.match(privacy, /cookie-consent\.js\?v=20261111-gtm-consent-api-1/);
-  assert.match(home, /<script src="\/hostinger\.js\?v=20261001-form-primary-1" defer><\/script>/);
+  assert.match(home, /<script src="\/hostinger\.js\?v=20261112-rate-limit-feedback-1" defer><\/script>/);
   assert.match(home, /rel="canonical" href="https:\/\/psicoterapia\.alcyannegouveiapsi\.com\.br\/"/);
   assert.match(home, /property="og:type" content="website"/);
   assert.match(home, /name="twitter:card" content="summary_large_image"/);
@@ -303,4 +303,77 @@ test("consent bridge orders denied/granted transitions and avoids PII", async ()
   assert.ok(fn.indexOf('event: "s4x_consent_update"') < fn.indexOf('event: "marketing_consent_granted"'));
   assert.doesNotMatch(fn, /nome|telefone|whatsapp|e-?mail|diagnostico/i);
   assert.match(source, /s4x_consent_choice: choice/);
+});
+
+test("rate-limited form keeps dataLayer clean, suppresses retries and explains the wait", async () => {
+  const source = await readFile(new URL("hostinger.js", root), "utf8");
+  let submitHandler;
+  const events = [];
+  const input = (value = "") => ({
+    value, checked: true, focus() {}, setAttribute() {}, removeAttribute() {}, addEventListener() {},
+  });
+  const name = input("Ana");
+  const phone = input("(85) 99999-9999");
+  const consent = input();
+  const submit = { disabled: false, textContent: "", hidden: false };
+  const retry = { hidden: true, addEventListener() {} };
+  const fallback = { hidden: true, addEventListener() {} };
+  const status = { textContent: "" };
+  const popup = { closed: false, opener: null, location: { href: "about:blank" }, close() { this.closed = true; } };
+  const modal = {
+    hidden: false,
+    querySelector() { return { querySelectorAll() { return []; } }; },
+    querySelectorAll() { return []; },
+  };
+  const form = {
+    elements: { website: { value: "" } },
+    querySelector(selector) {
+      if (selector === ".leadSubmit") return submit;
+      if (selector === ".leadRetry") return retry;
+      if (selector === ".leadFallback") return fallback;
+      return null;
+    },
+    addEventListener(type, handler) { if (type === "submit") submitHandler = handler; },
+  };
+  const fields = {
+    "lead-modal": modal, "lead-form": form, "lead-name": name,
+    "lead-phone": phone, "lead-consent": consent,
+    "lead-form-status": status,
+  };
+  const document = {
+    getElementById(id) { return fields[id] ?? { textContent: "" }; },
+    querySelectorAll() { return []; },
+    addEventListener() {},
+    body: { classList: { add() {}, remove() {} } },
+    referrer: "",
+  };
+  const window = {
+    dataLayer: events,
+    open() { return popup; },
+    location: { search: "", href: "https://psicoterapia.alcyannegouveiapsi.com.br/" },
+    setTimeout, clearTimeout,
+  };
+  const fetch = (url) => String(url).includes("?status=1")
+    ? new Promise(() => {})
+    : Promise.resolve({
+        ok: false, status: 429,
+        json: async () => ({ ok: false, code: "rate_limited" }),
+      });
+  vm.runInNewContext(source, {
+    window, document, fetch, URLSearchParams, console,
+    crypto: { randomUUID() { return "test-id"; } },
+    sessionStorage: { getItem() { return null; }, setItem() {} },
+  });
+  await submitHandler({ preventDefault() {} });
+  assert.match(status.textContent, /Muitas tentativas/);
+  assert.equal(retry.hidden, true);
+  assert.equal(fallback.hidden, false);
+  assert.equal(popup.closed, true);
+  assert.equal(events.some(event => event.event === "lead_form_submit"), false);
+});
+
+test("privacy page names Meta Pixel and excludes form PII from tracking", async () => {
+  const html = await readFile(new URL("politica-de-privacidade/index.html", root), "utf8");
+  assert.match(html, /Meta Pixel \(Facebook e Instagram\)/);
+  assert.match(html, /não são enviados ao Google Ads, Google Analytics ou Meta Pixel/);
 });
